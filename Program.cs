@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using MoviesApi.Context;
 using MoviesApi.Contracts;
 using MoviesApi.Repository;
@@ -13,7 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddControllers();
 
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(sw =>
+        sw.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Title = "MovieCRUD",
+            Version = "v1",
+            Description = "Simple CRUD using Entity Framework 6"
+        }));
 }
 
 var app = builder.Build();
