@@ -6,6 +6,7 @@ namespace MoviesApi.Repository;
 public class UnitOfWork : IUnitOfWork
 {
     private IMovieRepository movieRepo;
+    private IStarRepository starRepo;
     private readonly MovieContext context;
     public UnitOfWork(MovieContext context)
     {
@@ -14,6 +15,9 @@ public class UnitOfWork : IUnitOfWork
 
     public IMovieRepository MoviesRepository =>
         movieRepo ??= new MovieRepository(context);
+
+    public IStarRepository StarsRepository =>
+        starRepo ??= new StarRepository(context);
 
     public async Task Commit()
         => await context.SaveChangesAsync();
