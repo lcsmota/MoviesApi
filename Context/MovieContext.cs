@@ -9,4 +9,5 @@ public class MovieContext : DbContext
         : base(options) { }
 
     DbSet<Movie> Movies { get; set; } = null!;
+    DbSet<Star> Stars { get; set; } = null!;
 }
