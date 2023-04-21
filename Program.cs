@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MoviesApi.Context;
@@ -13,13 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddControllers();
 
+    builder.Services.AddFluentValidationAutoValidation()
+        .AddFluentValidationClientsideAdapters()
+        .AddValidatorsFromAssemblyContaining(typeof(Program));
+
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(sw =>
         sw.SwaggerDoc("v1", new OpenApiInfo
         {
             Title = "MovieCRUD",
             Version = "v1",
-            Description = "Simple CRUD using Entity Framework 6"
+            Description = "Simple CRUD using Entity Framework 7"
         }));
 
     builder.Services.AddCors();
